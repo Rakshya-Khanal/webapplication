@@ -1,0 +1,56 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model WebApplication1.ViewModel.LoginVM
+@{ Layout = "_Layout";}
+
+@{
+
+    ViewData["Title"] = "Log in";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="text-center">You can not access: <span class="text-success">@ViewData["ReturnUrl"]</span> because you are <span class="text-danger">not authenticated!</span></h2>
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <section>
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-info btn-block" type="submit" ><strong>Log in</strong></button>
+                    </div>
+                    </div>
+</form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+
+
+
+
